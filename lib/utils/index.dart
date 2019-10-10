@@ -1,22 +1,6 @@
+import 'package:flutter_juejin/common/constraints.dart';
 import 'package:flutter_juejin/models/category.dart';
-
-List<Category> getCategory() {
-  const category = {
-    '推荐': '',
-    '后端': '5562b419e4b00c57d9b94ae2',
-    '前端': '',
-    'Android': '',
-    'ios': '',
-    '人工智能': '',
-    '开发工具': '',
-    '代码人生': '',
-    '阅读': ''
-  };
-
-  return category.keys
-      .map((label) => Category(category[label], label))
-      .toList();
-}
+import 'package:flutter_juejin/models/tag.dart';
 
 DateTime parseDateTime(dynamic rawValue) {
   final type = rawValue.runtimeType;
@@ -54,4 +38,45 @@ String formatDate(DateTime d) {
   } else {
     return '${difference.inSeconds}秒前';
   }
+}
+
+Map<String, dynamic> getQueryParams({
+  Category category,
+  List<Tag> tags,
+  String queryId,
+}) {
+  return {
+    'extensions': {
+      'query': {
+        'id': queryId,
+      }
+    },
+    'variables': {
+      'first': 20,
+      'category': category?.id,
+      'order': 'POPULAR',
+    }
+  };
+}
+
+Map<String, dynamic> getListParams({
+  Category category,
+  List<Tag> tags,
+}) {
+  return getQueryParams(
+    queryId: Constraints.getListQueryIdByCategory(category),
+    category: category,
+    tags: tags,
+  );
+}
+
+Map<String, dynamic> getTagsParams({
+  Category category,
+  List<Tag> tags,
+}) {
+  return getQueryParams(
+    queryId: Constraints.getTagQueryId(),
+    category: category,
+    tags: tags,
+  );
 }

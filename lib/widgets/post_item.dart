@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_juejin/models/post.dart';
 import 'package:flutter_juejin/utils/index.dart';
+import 'package:flutter_juejin/common/constraints.dart';
 
 class PostItem extends StatelessWidget {
   Post _post;
@@ -104,12 +105,12 @@ class PostItem extends StatelessWidget {
       children: [
         _buildCount(
           context,
-          "https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg",
+          Constraints.getImageIconByName(ImageIconName.favorite_small),
           _likeCount,
         ),
         _buildCount(
           context,
-          "https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg",
+          Constraints.getImageIconByName(ImageIconName.comment_small),
           _commentCount,
         ),
       ],

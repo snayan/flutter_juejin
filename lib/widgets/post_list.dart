@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_juejin/models/category.dart';
 import 'package:flutter_juejin/models/post.dart';
 import 'package:flutter_juejin/net/request.dart' as jjHttp;
+import 'package:flutter_juejin/utils/index.dart';
 import 'package:flutter_juejin/widgets/post_item.dart';
 
 class PostList extends StatefulWidget {
@@ -21,17 +22,7 @@ class _PostListState extends State<PostList> {
   bool _hasNextPage;
 
   Map<String, dynamic> get _params {
-    return {
-      'extensions': {
-        'query': {
-          'id': '21207e9ddb1de777adeaca7a2fb38030',
-        }
-      },
-      'variables': {
-        'first': 20,
-        'order': 'POPULAR',
-      }
-    };
+    return getListParams(category: widget._category);
   }
 
   queryList() async {

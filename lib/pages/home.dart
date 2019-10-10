@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_juejin/utils/index.dart';
 import 'package:flutter_juejin/widgets/post_list.dart';
+import 'package:flutter_juejin/common/constraints.dart';
 
 class Home extends StatefulWidget {
   static const routeName = '/';
@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  final tabItems = getCategory();
+  final tabItems = Constraints.getAllCategory();
   TabController _tabController;
 
   @override
