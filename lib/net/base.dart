@@ -23,7 +23,7 @@ class BaseHttp {
   static init() {
     HttpClient client = new HttpClient();
     // proxy
-    if (!Global.isRelease) {
+    if (Global.isRelease) {
       String proxy =
           Platform.isAndroid ? '192.168.1.101:8888' : 'localhost:8888';
       client.findProxy = (Uri uri) => 'PROXY $proxy';

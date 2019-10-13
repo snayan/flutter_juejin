@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_juejin/widgets/post_list.dart';
 import 'package:flutter_juejin/common/constraints.dart';
+import './body.dart';
 
 class Home extends StatefulWidget {
   static const routeName = '/';
@@ -22,6 +22,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _tabController,
-        children: tabItems.map((item) => PostList(item)).toList(),
+        children: tabItems.map((item) => HomeBody(item)).toList(),
       ),
     );
   }
