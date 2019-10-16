@@ -44,6 +44,7 @@ Map<String, dynamic> getQueryParams({
   Category category,
   List<Tag> tags,
   String queryId,
+  String after,
 }) {
   return {
     'extensions': {
@@ -54,6 +55,7 @@ Map<String, dynamic> getQueryParams({
     'variables': {
       'first': 20,
       'category': category?.id,
+      'after': after,
       'order': 'POPULAR',
     }
   };
@@ -62,11 +64,13 @@ Map<String, dynamic> getQueryParams({
 Map<String, dynamic> getListParams({
   Category category,
   List<Tag> tags,
+  String after,
 }) {
   return getQueryParams(
     queryId: Constraints.getListQueryIdByCategory(category),
     category: category,
     tags: tags,
+    after: after,
   );
 }
 
