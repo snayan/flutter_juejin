@@ -17,7 +17,8 @@ class HomeBody extends StatefulWidget {
   }
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _HomeBodyState extends State<HomeBody>
+    with AutomaticKeepAliveClientMixin<HomeBody> {
   List<Post> _list;
   String _lastCursor;
   bool _hasNextPage;
@@ -73,4 +74,7 @@ class _HomeBodyState extends State<HomeBody> {
       itemBuilder: (BuildContext context, int index) => PostItem(_list[index]),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

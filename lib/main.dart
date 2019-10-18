@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_juejin/routes/index.dart';
+import 'package:flutter_juejin/root.dart';
 import 'package:flutter_juejin/common/global.dart';
 
 void main() async {
@@ -38,7 +38,7 @@ class JuejinApp extends StatelessWidget {
     return MaterialApp(
       title: 'juejin',
       theme: appTheme,
-      routes: routes,
+      home: RootWidget(),
     );
   }
 }

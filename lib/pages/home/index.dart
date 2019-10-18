@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_juejin/common/constraints.dart';
+import 'package:flutter_juejin/models/destination.dart';
 import './body.dart';
 
 class Home extends StatefulWidget {
-  static const routeName = '/';
+  Home(this._destination);
 
+  Destination _destination;
   @override
   _HomeState createState() {
     return _HomeState();
@@ -18,7 +20,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: tabItems.length);
+    _tabController = TabController(
+      vsync: this,
+      length: tabItems.length,
+    );
   }
 
   @override
@@ -31,7 +36,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("首页"),
+        title: Text(widget._destination.title),
         bottom: TabBar(
           tabs: tabItems.map((item) => Tab(text: item.label)).toList(),
           controller: _tabController,
