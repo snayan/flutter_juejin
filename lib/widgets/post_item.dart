@@ -6,9 +6,10 @@ import 'package:flutter_juejin/utils/index.dart';
 import 'package:flutter_juejin/common/constraints.dart';
 
 class PostItem extends StatelessWidget {
-  Post _post;
+  final Post _post;
+  final void Function(Post) onTap;
 
-  PostItem(this._post);
+  PostItem(this._post, {this.onTap});
 
   String get _tags {
     return _post.tags?.map((e) => e.name)?.join(' / ');
@@ -133,8 +134,13 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: _buildPost(context),
+    return GestureDetector(
+      child: Card(
+        child: _buildPost(context),
+      ),
+      onTap: () {
+        onTap(_post);
+      },
     );
   }
 }

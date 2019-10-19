@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_juejin/models/category.dart';
 import 'package:flutter_juejin/models/post.dart';
 import 'package:flutter_juejin/widgets/list_view.dart';
@@ -53,6 +54,21 @@ class _HomeBodyState extends State<HomeBody>
     }
   }
 
+  navigateToDetail(BuildContext context, Post post) async {
+    final url = 'https://juejin.im/post/${post.id}';
+    if (await canLaunch(url)) {
+      await launch(url, forceWebView: true);
+    } else {
+      final scaffold = Scaffold.of(context);
+      scaffold.showSnackBar(
+        SnackBar(
+          content: Text('can not launch $url'),
+          duration: Duration(milliseconds: 500),
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     refreshPosts();
@@ -71,7 +87,12 @@ class _HomeBodyState extends State<HomeBody>
       onMore: getMorePosts,
       hasMoreData: _hasNextPage ?? false,
       itemCount: _list?.length ?? 0,
-      itemBuilder: (BuildContext context, int index) => PostItem(_list[index]),
+      itemBuilder: (BuildContext context, int index) => PostItem(
+        _list[index],
+        onTap: (post) {
+          navigateToDetail(context, post);
+        },
+      ),
     );
   }
 

@@ -28,6 +28,8 @@ dependencies:
 
   flutter_svg: ^0.14.1
 
+  url_launcher: ^5.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
