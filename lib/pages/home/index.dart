@@ -4,9 +4,10 @@ import 'package:flutter_juejin/models/destination.dart';
 import './body.dart';
 
 class Home extends StatefulWidget {
-  Home(this._destination);
+  Home(this._destination, {this.onTab});
 
   Destination _destination;
+  VoidCallback onTab;
   @override
   _HomeState createState() {
     return _HomeState();
@@ -24,6 +25,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       vsync: this,
       length: tabItems.length,
     );
+    _tabController.addListener(() {
+      if (widget.onTab != null) {
+        widget.onTab();
+      }
+    });
   }
 
   @override

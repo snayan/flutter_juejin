@@ -18,7 +18,8 @@ class Destination {
 
   ThemeData theme(BuildContext context) {
     var theme = Theme.of(context);
-    return theme.copyWith(primaryColor: color);
+    return theme.copyWith(
+        primaryColor: color, scaffoldBackgroundColor: color[50]);
   }
 
   static List<Destination> get allDestinations {

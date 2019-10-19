@@ -7,9 +7,13 @@ import 'package:flutter_juejin/pages/pins/index.dart';
 import 'package:flutter_juejin/pages/topics/index.dart';
 
 class DestinationView extends StatefulWidget {
-  DestinationView(this._destination);
+  DestinationView({
+    @required this.destination,
+    this.showBottomNavigator,
+  });
 
-  final Destination _destination;
+  final VoidCallback showBottomNavigator;
+  final Destination destination;
 
   @override
   _DestinationViewState createState() {
@@ -20,7 +24,7 @@ class DestinationView extends StatefulWidget {
 class _DestinationViewState extends State<DestinationView> {
   @override
   Widget build(BuildContext context) {
-    final destination = widget._destination;
+    final destination = widget.destination;
     Widget child;
 
     switch (destination.page) {
@@ -37,7 +41,10 @@ class _DestinationViewState extends State<DestinationView> {
         child = Events(destination);
         break;
       default:
-        child = Home(destination);
+        child = Home(
+          destination,
+          onTab: widget.showBottomNavigator,
+        );
     }
     return Theme(
       child: child,

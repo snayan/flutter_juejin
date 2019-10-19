@@ -33,7 +33,12 @@ class _RootWidgetState extends State<RootWidget> with TickerProviderStateMixin {
       final child = FadeTransition(
         opacity: _faders[index].drive(CurveTween(curve: Curves.fastOutSlowIn)),
         child: KeyedSubtree(
-          child: DestinationView(destination),
+          child: DestinationView(
+            destination: destination,
+            showBottomNavigator: () {
+              _hider.forward();
+            },
+          ),
           key: _keys[index],
         ),
       );
@@ -75,6 +80,7 @@ class _RootWidgetState extends State<RootWidget> with TickerProviderStateMixin {
       return AnimationController(
           vsync: this, duration: kThemeAnimationDuration);
     }).toList();
+    _faders[_currentIndex].value = 1.0;
     _keys = List.generate(Destination.allDestinations.length, (_) {
       return GlobalKey();
     });
@@ -102,17 +108,19 @@ class _RootWidgetState extends State<RootWidget> with TickerProviderStateMixin {
           children: _destinationPages,
         ),
       ),
-      bottomNavigationBar: SizeTransition(
-        sizeFactor: _hider,
-        axisAlignment: -1.0,
-        child: BottomNavigationBar(
-          items: _bottomItem,
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+      bottomNavigationBar: ClipRect(
+        child: SizeTransition(
+          sizeFactor: _hider,
+          axisAlignment: -1.0,
+          child: BottomNavigationBar(
+            items: _bottomItem,
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );
