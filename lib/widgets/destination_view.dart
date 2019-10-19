@@ -43,23 +43,5 @@ class _DestinationViewState extends State<DestinationView> {
       child: child,
       data: destination.theme(context),
     );
-    // return Navigator(
-    //   onGenerateRoute: (RouteSettings settings) {
-    //     print(settings);
-    //     return MaterialPageRoute(
-    //       settings: settings,
-    //       builder: (BuildContext context) {
-    //         var builder = routes[settings.name];
-    //         if (builder != null) {
-    //           return builder(widget._destination);
-    //         }
-    //         // 404
-    //         return Center(
-    //           child: Text('not found'),
-    //         );
-    //       },
-    //     );
-    //   },
-    // );
   }
 }

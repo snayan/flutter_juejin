@@ -30,7 +30,7 @@ class _JJListViewState extends State<JJListView> {
   bool _showMoreIndicator = false;
 
   bool get _hasMore {
-    return widget.onRefresh != null;
+    return widget.onMore != null;
   }
 
   bool get _hasRefresh {
@@ -70,16 +70,16 @@ class _JJListViewState extends State<JJListView> {
       itemCount: _hasMore ? widget.itemCount + 1 : widget.itemCount,
       itemBuilder: _buildItem,
     );
-    if (_hasMore) {
-      child = MoreIndicator(
-        child: child,
-        onMore: triggerMore,
-      );
-    }
     if (_hasRefresh) {
       child = RefreshIndicator(
         child: child,
         onRefresh: widget.onRefresh,
+      );
+    }
+    if (_hasMore) {
+      child = MoreIndicator(
+        child: child,
+        onMore: triggerMore,
       );
     }
     return child;
