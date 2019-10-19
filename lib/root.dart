@@ -51,10 +51,8 @@ class _RootWidgetState extends State<RootWidget> with TickerProviderStateMixin {
 
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification.depth == 1) {
-      // 表示最外层的widget滚动，而非嵌套的widget在滚动
       if (notification is UserScrollNotification) {
         final UserScrollNotification userScroll = notification;
-        // print(userScroll);
         switch (userScroll.direction) {
           case ScrollDirection.forward:
             _hider.forward();
