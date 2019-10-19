@@ -30,7 +30,7 @@ class _HomeBodyState extends State<HomeBody>
 
   Future<void> refreshPosts() async {
     var params = getListParams(category: widget._category);
-    var data = await jjHttp.queryList(params);
+    var data = await jjHttp.queryList(params, useCache: false);
     // 由于数据请求是异步的，返回时，当前widget可能已经销毁了，在销毁的widget调用setState会报错。
     if (mounted) {
       setState(() {
